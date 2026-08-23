@@ -1,6 +1,7 @@
 #pragma once
 
 #include "HashCompareLPCTSTR.h"
+#include "SettingsProvider.h"
 #include <unordered_map>
 
 // Supports translation of texts from English to a target language using text files
@@ -25,6 +26,6 @@ private:
 	CNLS(void);
 	~CNLS(void);
 
-	static std::unordered_map<LPCTSTR, LPCTSTR, CHashCompareLPCTSTR, CHashCompareLPCTSTR> sm_texts;
+	static std::unordered_map<LPCTSTR, LPCTSTR, LPCTSTRHash, LPCTSTREqual> sm_texts;
 	static bool sm_bTableRead;
 };

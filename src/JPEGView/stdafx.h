@@ -40,6 +40,7 @@ extern CAppModule _Module;
 
 // STL stuff
 #include  <list>
+#include  <string>
 
 #define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS
 

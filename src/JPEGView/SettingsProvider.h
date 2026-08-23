@@ -5,10 +5,21 @@
 #include "UserCommand.h"
 #include "ProcessParams.h"
 #include "HashCompareLPCTSTR.h"
-#include <hash_map>
+#include <unordered_map>
 
+// Adapter to use the existing CHashCompareLPCTSTR with std::unordered_map
+struct LPCTSTRHash
+{
+	size_t operator()(LPCTSTR key) const { return CHashCompareLPCTSTR()(key); }
+};
 
-typedef stdext::hash_map<LPCTSTR, LPCTSTR, CHashCompareLPCTSTR> IniHashMap;
+struct LPCTSTREqual
+{
+	// equality for unordered_map must return true when strings are equal
+	bool operator()(LPCTSTR a, LPCTSTR b) const { return _tcscmp(a, b) == 0; }
+};
+
+typedef std::unordered_map<LPCTSTR, LPCTSTR, LPCTSTRHash, LPCTSTREqual> IniHashMap;
 
 // INI settings
 // All settings are first searched in a file name JPEGView.ini located in User/AppData/Roaming/JPEGView

@@ -1081,7 +1081,7 @@ void CImageLoadThread::ProcessReadLeptonRequest(CRequest* request) {
 	// As we don't know how big the buffer should be for storing a resulting JPEG image,
 	// allocating it twice bigger than the input LEPTON file size.
 	// It should be enough for most cases.
-	auto buffer_size = size * 2;
+	auto buffer_size = size * 3;
 
 	// Extract a JPEG data from the lepton file and pass it to JPEG handler for further decoding.
 	std::vector<uint8_t> buffer(buffer_size);
